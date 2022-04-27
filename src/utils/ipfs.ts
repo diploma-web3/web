@@ -20,7 +20,10 @@ export const pinObject = async (object: any) => {
   });
 };
 
-export const pinFormData = async (formData: FormData) => {
+export const pinFileToIpfs = async (file: File) => {
+  const formData = new FormData();
+  formData.append('file', file);
+
   const url = `${IPFS_PIN_HOST}pinFileToIPFS`;
 
   return axios.post(url, formData, {

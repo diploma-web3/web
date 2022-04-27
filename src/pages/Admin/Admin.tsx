@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import Header from '../../components/Header';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Card, Tabs } from 'antd';
 import { LockOutlined } from '@ant-design/icons';
+import ManageForm from './ManageForm';
+import { Header } from 'antd/es/layout/layout';
+import { connectMetamask } from '../../utils/contract';
 import ListForm from './ListForm';
-import FindForm from './FindForm';
-import ManageForm from '../Admin/ManageForm';
 
 const { TabPane } = Tabs;
 
@@ -18,8 +18,13 @@ const ContentLayout = styled.div`
 
 type TabName = 'list' | 'find' | 'manage';
 
-const Home = () => {
+const Admin = () => {
   const [selectedTab, setSelectedTab] = useState<TabName>('list');
+  useEffect(() => {
+    (async () => {
+      await connectMetamask();
+    })();
+  }, []);
 
   return (
     <div>
@@ -31,8 +36,7 @@ const Home = () => {
             activeKey={selectedTab}
             onChange={(tab) => setSelectedTab(tab as TabName)}
           >
-            <TabPane key={'list'} tab={<span>Tìm kiếm văn bằng</span>} />
-            <TabPane key={'find'} tab={<span>Tra cứu văn bằng</span>} />
+            <TabPane key={'list'} tab={<span>Danh sách văn bằng</span>} />
             <TabPane
               key={'manage'}
               tab={
@@ -46,7 +50,6 @@ const Home = () => {
 
           <div>
             {selectedTab === 'list' && <ListForm />}
-            {selectedTab === 'find' && <FindForm />}
             {selectedTab === 'manage' && <ManageForm />}
           </div>
         </Card>
@@ -55,4 +58,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Admin;

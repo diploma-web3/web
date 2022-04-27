@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Form, Input } from 'antd';
 import styled from 'styled-components';
 import { UserOutlined } from '@ant-design/icons';
@@ -21,8 +21,8 @@ const ListForm = () => {
   return (
     <Layout>
       <Form form={form} layout={'vertical'}>
-        <Form.Item label="Số CCCD/CMND" required={true} name={'icNum'}>
-          <Input prefix={<UserIcon />} placeholder="Nhập số CCCD/CMND" />
+        <Form.Item label="Mã sinh viên" required={true} name={'icNum'}>
+          <Input prefix={<UserIcon />} placeholder="Nhập mã sinh viên" />
         </Form.Item>
         <div style={{ textAlign: 'center' }}>
           <Form.Item>
