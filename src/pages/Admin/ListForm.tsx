@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Button, Form, Input, Table } from 'antd';
 import styled from 'styled-components';
 import { UserOutlined } from '@ant-design/icons';
-import { connectMetamask, findManyByIdNum, getUriById } from '../../utils/contract';
+import { connectMetamask, findManyByIdNum, getUriById, removeNFT } from '../../utils/contract';
 import { getIpfsUrl } from '../../utils/ipfs';
+import { BigNumber } from 'ethers';
 
 const Layout = styled.div`
   padding-top: 0.5rem;
@@ -55,7 +56,10 @@ const ListForm = () => {
           type="link"
           danger
           onClick={async () => {
-            const { id } = record;
+            console.log(record);
+            const { id, studentId, dipId, ipfsHash } = record;
+            const contract = await connectMetamask();
+            await removeNFT(contract, BigNumber.from(id), studentId, parseInt(dipId), ipfsHash);
             console.log(id);
           }}
         >

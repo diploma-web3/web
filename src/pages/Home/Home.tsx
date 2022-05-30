@@ -33,21 +33,11 @@ const Home = () => {
           >
             <TabPane key={'list'} tab={<span>Tìm kiếm văn bằng</span>} />
             <TabPane key={'find'} tab={<span>Tra cứu văn bằng</span>} />
-            <TabPane
-              key={'manage'}
-              tab={
-                <span>
-                  {' '}
-                  <LockOutlined /> Quản lý văn bằng
-                </span>
-              }
-            />
           </Tabs>
 
           <div>
             {selectedTab === 'list' && <ListForm />}
             {selectedTab === 'find' && <FindForm />}
-            {selectedTab === 'manage' && <ManageForm />}
           </div>
         </Card>
       </ContentLayout>

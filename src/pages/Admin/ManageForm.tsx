@@ -28,7 +28,7 @@ const Manage = () => {
 
       const { dipId, name, studentId, createdAt, ipfsHash } = values;
       const dip = {
-        dipId,
+        dipId: parseInt(dipId),
         name,
         studentId,
         createdAt: createdAt.toISOString(),
@@ -37,7 +37,7 @@ const Manage = () => {
       const res = await pinObject(JSON.stringify(dip));
       const { IpfsHash } = res.data;
 
-      const tokenId = await createNFT(contract, studentId, new Date(), IpfsHash);
+      const tokenId = await createNFT(contract, studentId, parseInt(dipId), IpfsHash);
       console.log(tokenId);
     } catch (e) {
     } finally {
@@ -51,7 +51,7 @@ const Manage = () => {
         <Form.Item
           label="Số hiệu văn bằng"
           name="dipId"
-          rules={[{ required: true, message: 'Vui lòng nhập số hiệu văn bằng!' }]}
+          rules={[{ required: true }]}
         >
           <Input />
         </Form.Item>
